@@ -8,7 +8,7 @@ const LocationSchema = new Schema({
     nubmer: { type: Number, required: true },
 
     //이름
-    name: { type: String, required: true, unique: true },
+    name: { type: String, required: true },
 
     // 카테고리
     category: {
