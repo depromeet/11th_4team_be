@@ -6,8 +6,8 @@ var cors = require("cors");
 const { errorHandler, errorLoger } = require("./middleware");
 const PORT = 5500;
 const { customResponse } = require("./utils/customResponse");
-const dotenv = require("dotenv");
-dotenv.config();
+// const dotenv = require("dotenv");
+// dotenv.config();
 // 커스텀 리스폰스
 app.response = Object.create(customResponse);
 const server = async () => {
@@ -25,12 +25,14 @@ const server = async () => {
     app.disable("etag");
 
     app.use(express.json());
+
+    //geoservice 이므로 geo 로 시작
     app.use("/geo", indexRouter);
 
     app.use(errorLoger);
     app.use(errorHandler);
     app.listen(PORT, async () => {
-      console.log("service-admin server on.");
+      console.log("geo server on.");
     });
   } catch (err) {
     console.log(err);

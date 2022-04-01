@@ -1,0 +1,26 @@
+version: "3.7"
+
+services:
+  nginx:
+    container_name: nginx
+    depends_on:
+      - geo
+    restart: always
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./nginx
+    ports:
+      - "80:80"
+
+  geo:
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./geo
+    container_name: geo
+    volumes:
+      - /app/node_modules
+      - ./geo:/app
+    ports:
+      - "5500:5500"
+    environment:
+      MONGO_URI: ${MONGO_URI}
