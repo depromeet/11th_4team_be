@@ -34,4 +34,10 @@ const LocationSchema = new Schema({
 LocationSchema.index({ geometry: "2dsphere" });
 const Location = model("location", LocationSchema);
 
+LocationSchema.options.toJSON = {
+  transform(doc, ret) {
+    delete ret.__v;
+    // delete ret.phonenumber;
+  },
+};
 module.exports = { Location };

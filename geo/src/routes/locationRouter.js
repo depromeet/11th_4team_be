@@ -13,4 +13,11 @@ router.post(
   locationController.postNewLocation
 );
 
+router.get(
+  "/",
+  // validator 관련해서 tuple형인데, (...)전개 해도되고 안해도 됨
+  locationValidators.getLocation,
+  locationController.getLocation
+);
+
 module.exports = router;
