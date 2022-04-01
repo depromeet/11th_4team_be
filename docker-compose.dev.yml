@@ -13,6 +13,8 @@ services:
       - "80:80"
 
   geo:
+    links:
+      - "noti"
     build:
       dockerfile: Dockerfile.dev
       context: ./geo
@@ -22,5 +24,18 @@ services:
       - ./geo:/app
     ports:
       - "5500:5500"
+    environment:
+      MONGO_URI: ${MONGO_URI}
+
+  noti:
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./noti
+    container_name: noti
+    volumes:
+      - /app/node_modules
+      - ./noti:/app
+    ports:
+      - "5600:5600"
     environment:
       MONGO_URI: ${MONGO_URI}

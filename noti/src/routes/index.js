@@ -4,7 +4,6 @@
 var express = require("express");
 var router = express.Router();
 
-router.use("/location", require("./locationRouter"));
-router.use("/noti", require("./notiTestRouter"));
+router.use("/test", require("./notiTestRouter"));
 
 module.exports = router;
