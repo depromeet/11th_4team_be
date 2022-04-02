@@ -11,11 +11,7 @@ module.exports = {
       const { name, category, radius, lng, lat } = req.body;
       //prettier test
 
-      console.log(
-        'name',
-
-        name
-      );
+      console.log('name', name);
       const location = await locationService.postNewLocation({
         name,
         category,
