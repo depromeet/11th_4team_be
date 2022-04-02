@@ -12,8 +12,7 @@ docker-compose  -f docker-compose.dev.yml up
 docker 파일이나 nginx 설정등 변화가 생겨서 도커를 다시 빌드 해야할 때
 
 ```shell
-docker-compose -f docker-compose.dev.yml --build
-docker-compose -f docker-compose.dev.yml up
+docker-compose -f docker-compose.dev.yml up --build
 ```
 
 ### 환경변수
