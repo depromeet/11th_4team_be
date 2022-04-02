@@ -1,4 +1,4 @@
-version: "3.7"
+version: '3.7'
 
 services:
   nginx:
@@ -10,11 +10,11 @@ services:
       dockerfile: Dockerfile.dev
       context: ./nginx
     ports:
-      - "80:80"
+      - '80:80'
 
   geo:
     links:
-      - "noti"
+      - 'noti'
     build:
       dockerfile: Dockerfile.dev
       context: ./geo
@@ -23,7 +23,7 @@ services:
       - /app/node_modules
       - ./geo:/app
     ports:
-      - "5500:5500"
+      - '5500:5500'
     environment:
       MONGO_URI: ${MONGO_URI}
 
@@ -36,6 +36,6 @@ services:
       - /app/node_modules
       - ./noti:/app
     ports:
-      - "5600:5600"
+      - '5600:5600'
     environment:
       MONGO_URI: ${MONGO_URI}

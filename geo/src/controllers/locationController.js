@@ -1,5 +1,5 @@
-const { CustomError, ServerCommonError } = require("../errors");
-const { locationService } = require("../services");
+const { CustomError, ServerCommonError } = require('../errors');
+const { locationService } = require('../services');
 
 module.exports = {
   /**
@@ -14,7 +14,7 @@ module.exports = {
         category,
         radius,
         lng,
-        lat,
+        lat
       });
 
       res.custom200SuccessData(location);
@@ -34,11 +34,12 @@ module.exports = {
    */
   getLocation: async (req, res, next) => {
     try {
-      const { radius, lng, lat } = req.body;
+      // 쿼리
+      const { radius, lng, lat } = req.query;
       const locationArray = await locationService.getLocation({
-        radius,
+        radius: parseInt(radius),
         lng,
-        lat,
+        lat
       });
 
       res.custom200SuccessData(locationArray);
@@ -50,5 +51,5 @@ module.exports = {
       }
       return next(new ServerCommonError(err));
     }
-  },
+  }
 };
