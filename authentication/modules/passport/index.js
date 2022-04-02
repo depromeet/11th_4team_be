@@ -1,5 +1,6 @@
 const local = require('./localStrategy')
-module.exports = (passport) => {
+const jwt = require('./jwtStrategy')
+module.exports = (passport, secretAccess, secretRefresh) => {
   passport.serializeUser((phoneNumber, done) => {
     done(null, phoneNumber)
   })
@@ -8,4 +9,5 @@ module.exports = (passport) => {
     done(null, phoneNumber)
   })
   local(passport)
+  jwt(passport, secretAccess, secretRefresh)
 }

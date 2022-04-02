@@ -9,6 +9,7 @@
   "author": "Woojin Kim",
   "dependencies": {
     "async-redis": "^2.0.0",
+    "aws-sdk": "^2.1106.0",
     "connect": "^3.7.0",
     "connect-mongo": "^3.2.0",
     "connect-redis": "^5.0.0",
@@ -17,10 +18,14 @@
     "express": "^4.16.3",
     "express-session": "^1.15.6",
     "http": "0.0.0",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.8.7",
     "passport": "^0.4.0",
+    "passport-jwt": "^4.0.0",
     "passport-local": "^1.0.0",
     "redis": "^4.0.4",
+    "swagger-jsdoc": "^6.2.0",
+    "swagger-ui-express": "^4.3.0",
     "winston": "^3.2.1"
   }
 }

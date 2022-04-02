@@ -4,51 +4,44 @@ const {catchAsync} = require(`${base}/utils`)
 const AppError = require(`${base}/errors/appError`)
 const authService = require(`${base}/services/authService`)
 
-const generateCode = catchAsync(async (req, res, next) => {
-  await authService.generateCode(req.body.phoneNumber)
+const createCode = catchAsync(async (req, res, next) => {
+  const phoneNumber = req.body.phoneNumber
+  const verficiationCode = await authService.createCode(phoneNumber)
+
+  await authService.sendCode(phoneNumber, verficiationCode)
   return res.status(200).json({
     status: 'SUCCESS',
-    message: '번호 인증코드를 생성했습니다.',
+    message: '인증코드를 전송했습니다',
   })
 })
 
-const checkCode = (req, res, next) => {
-  passport.authenticate('local', (err, info, message) => {
+const verifyCode = (req, res, next) => {
+  passport.authenticate('local', (err, info, {message}) => {
     if (err) next(AppError.redisError(err.message))
     else if (!info) next(AppError.verificationError(message))
     else
       return req.logIn(info, (err) => {
         if (err) next(AppError.verificationError(err.message))
+        const {accessToken, refreshToken} = authService.createToken(info)
         return res.status(200).json({
           status: 'SUCCESS',
-          message,
+          accessToken,
+          refreshToken,
         })
       })
   })(req, res, next)
 }
 
-const isVerified = (req, res, next) => {
-  if (req.isAuthenticated()) next()
-  else return next(AppError.unverifiedError('인증되지 않은 상태입니다'))
-}
-
-const isNotVerified = (req, res, next) => {
-  if (!req.isAuthenticated()) next()
-  else return next(AppError.verifiedError('인증된 상태입니다'))
-}
-
-const logout = (req, res) => {
-  req.logout()
-  req.session.destroy((err) => {
-    if (err) next(AppError.sessionError(err.message))
-    res.status(200).json({message: '로그아웃을 성공했습니다'})
+const refreshToken = (req, res) => {
+  const data = authService.refreshToken(req.user, req.body)
+  return res.status(200).json({
+    ...data,
+    status: 'SUCCESS',
   })
 }
 
 module.exports = {
-  generateCode,
-  checkCode,
-  isVerified,
-  isNotVerified,
-  logout,
+  createCode,
+  verifyCode,
+  refreshToken,
 }

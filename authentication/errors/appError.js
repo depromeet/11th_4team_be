@@ -10,6 +10,9 @@ class AppError extends Error {
   static redisError(message) {
     return new AppError(500, message)
   }
+  static JWTError(message) {
+    return new AppError(500, message)
+  }
   static verificationError(message) {
     return new AppError(401, message)
   }
