@@ -9,6 +9,13 @@ module.exports = {
   postNewLocation: async (req, res, next) => {
     try {
       const { name, category, radius, lng, lat } = req.body;
+      //prettier test
+
+      console.log(
+        'name',
+
+        name
+      );
       const location = await locationService.postNewLocation({
         name,
         category,
