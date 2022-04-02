@@ -20,10 +20,12 @@ const RoomSchema = new Schema(
       required: true
     },
 
+    userList: [{ type: Schema.Types.ObjectId, ref: 'user' }],
+
     geometry: {
-      //lng lat
-      type: { type: String },
-      coordinates: []
+      //lng lat Point , mul
+      type: { type: String, required: true },
+      coordinates: { type: [], required: true }
     }
 
     // 참여자 정보 ( 숫자를 ) 여기에 넣을지 모델을 분리시킬지.

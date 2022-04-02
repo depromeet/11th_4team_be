@@ -4,17 +4,20 @@ const { Schema, model } = require('mongoose');
 
 const AlarmSchema = new Schema({
   receiver: { type: Schema.Types.ObjectId, ref: 'user' },
-  watch: { type: Boolean, default: true },
+
+  // watch: { type: Boolean, default: true },
+  // 정책 100 40~
   list: [
     {
       //from user
+
       sender: { type: Schema.Types.ObjectId, ref: 'user' },
       eventType: {
         type: String,
         required: true,
         enum: ['chat', 'question']
       },
-      date: { type: Date, default: Date.now },
+      createdAt: { type: Date, default: Date.now },
       message: { type: String, required: true },
       deepLink: { type: String, required: true }
     }
