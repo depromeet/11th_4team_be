@@ -13,6 +13,7 @@ module.exports = (passport, secretAccess, secretRefresh) => {
       if (payload) done(null, payload, {message: '인증 성공'})
       else done(null, false, {message: '인증 실패'})
     } catch (e) {
+      console.log(e)
       done(e)
     }
   }

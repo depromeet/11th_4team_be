@@ -16,9 +16,9 @@ const createCode = catchAsync(async (req, res, next) => {
 })
 
 const verifyCode = (req, res, next) => {
-  passport.authenticate('local', (err, info, {message}) => {
+  passport.authenticate('local', (err, info, message ) => {
     if (err) next(AppError.redisError(err.message))
-    else if (!info) next(AppError.verificationError(message))
+    else if (!info) next(AppError.verificationError(message.message))
     else
       return req.logIn(info, (err) => {
         if (err) next(AppError.verificationError(err.message))

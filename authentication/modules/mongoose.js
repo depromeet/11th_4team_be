@@ -1,5 +1,8 @@
 const logger = require(`${base}/modules/logger`)
 const mongoose = require('mongoose')
+mongoose.set('useNewUrlParser', true);
+mongoose.set('useFindAndModify', false);
+mongoose.set('useCreateIndex', true);
 
 module.exports = {
   initialize: (host, port) => {

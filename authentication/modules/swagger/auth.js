@@ -63,11 +63,31 @@
  *                  type: string
  *                  example: SUCCESS
  *                accessToken:
- *                  type: string
- *                  example: XXXXXXXXXXX
+ *                  type: object
+ *                  required:
+ *                  - token
+ *                  - iat
+ *                  - exp
+ *                  properties:
+ *                    token:
+ *                      type: string
+ *                    iat:
+ *                      type: string
+ *                    exp:
+ *                      type: string
  *                refreshToken:
- *                  type: string
- *                  example: XXXXXXXXXXX
+ *                  type: object
+ *                  required:
+ *                  - token
+ *                  - iat
+ *                  - exp
+ *                  properties:
+ *                    token:
+ *                      type: string
+ *                    iat:
+ *                      type: string
+ *                    exp:
+ *                      type: string
  */
 
 /**
@@ -95,5 +115,38 @@
  *                type: boolean
  *        responses:
  *          200:
- *            description: "결과"
+ *            description: 성공
+ *            content:
+ *              text/plain:
+ *            schema:
+ *              properties:
+ *                status:
+ *                  type: string
+ *                  example: SUCCESS
+ *                accessToken:
+ *                  type: object
+ *                  required:
+ *                  - token
+ *                  - iat
+ *                  - exp
+ *                  properties:
+ *                    token:
+ *                      type: string
+ *                    iat:
+ *                      type: string
+ *                    exp:
+ *                      type: string
+ *                refreshToken:
+ *                  type: object
+ *                  required:
+ *                  - token
+ *                  - iat
+ *                  - exp
+ *                  properties:
+ *                    token:
+ *                      type: string
+ *                    iat:
+ *                      type: string
+ *                    exp:
+ *                      type: string
  */
