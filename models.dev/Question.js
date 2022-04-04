@@ -11,7 +11,7 @@ const QuestionSchema = new Schema({
   chat: { type: Schema.Types.ObjectId, ref: 'chat' },
 
   // 질문을 올린 유저정보 필요없을수도있음!
-  sender: { type: Schema.Types.ObjectId, ref: 'user' },
+  //   sender: { type: Schema.Types.ObjectId, ref: 'user' },
 
   commentList: [
     {
