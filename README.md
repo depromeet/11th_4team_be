@@ -32,6 +32,17 @@ docker 파일이나 nginx 설정등 변화가 생겨서 도커를 다시 빌드 
 docker-compose -f docker-compose.dev.yml up --build
 ```
 
+## 디렉토리 구조
+    src
+    ├── controllers
+    ├── errors ( 커스텀 에러 관련 )
+    ├── middleware (인증 미들웨어 , validationCatch 등)
+    ├── models ( mongoose orm )
+    ├── routes
+    ├── services
+    ├── utils (decode ,encode 함수등)
+    └── validators (express-validator)
+
 ### 환경변수
 
 main 디렉토리 .env 파일로 docker-compose yml 파일로 집어넣어준다.

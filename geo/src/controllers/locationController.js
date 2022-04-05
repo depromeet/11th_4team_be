@@ -20,7 +20,8 @@ module.exports = {
         lat
       });
 
-      res.custom200SuccessData(location);
+      //  const user = await User.find()
+      res.custom200SuccessData(user);
     } catch (err) {
       // 에러 핸들러에서 잡게 됨
       // 400 번대 커스텀 에러는 에러로던지고 캐치못한 에러는 500번대로
