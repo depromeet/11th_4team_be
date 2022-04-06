@@ -1,4 +1,4 @@
-import { UserModule } from './apis/user/user.module';
+import { UserModule } from './apis/users/user.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule } from '@nestjs/config';
 import { Module, NestModule, MiddlewareConsumer } from '@nestjs/common';

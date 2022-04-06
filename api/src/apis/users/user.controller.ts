@@ -1,7 +1,7 @@
 import { ReqUser } from 'src/common/decorators/user.decorator';
 import { JwtAuthGuard } from 'src/auth/guards/jwt.guard';
 import { User } from 'src/models/user.model';
-import { AuthenticationService } from './../authentication/authentication.service';
+import { AuthenticationService } from '../authentication/authentication.service';
 import {
   Body,
   Controller,

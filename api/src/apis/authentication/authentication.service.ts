@@ -1,4 +1,4 @@
-import { PhoneNumberDto } from './../user/dto/user.dto';
+import { PhoneNumberDto } from '../users/dto/user.dto';
 import { Injectable } from '@nestjs/common';
 import { UserRepository } from 'src/repositories/user.repository';
 import { generateRandomCode } from 'src/common/funcs/random-code.func';
