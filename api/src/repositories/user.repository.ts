@@ -13,7 +13,7 @@ export class UserRepository {
   ) {}
 
   async findOneByUserId(userId: string) {
-    const user = await this.userModel.findOne({ id: userId });
+    const user = await this.userModel.findOne({ _id: userId });
     return user;
   }
 

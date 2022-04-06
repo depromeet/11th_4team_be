@@ -16,23 +16,15 @@ export class AuthService {
     // 해당하는 계정이 있는지
     const user = await this.userRepository.findOneByPhoneNumber(data);
     if (!user) {
-      throw new UnauthorizedException('이메일 확인바람');
+      throw new UnauthorizedException('휴대폰 번호 확인바람');
     }
-    // 패스워드 일치하는지
-    // const isPasswordValidated: boolean = await bcrypt.compare(
-    //   password,
-    //   cat.password,
-    // );
 
-    //   if (!isPasswordValidated) {
-    //     throw new UnauthorizedException('비밀번호 확인 바람');
-    //   }
+    console.log(user);
 
-    //   console.log(cat, isPasswordValidated);
-    //   const payload = { email: email, sub: cat.id };
+    const payload = { _id: user.id };
 
-    //   return {
-    //     token: this.jwtService.sign(payload),
-    //   };
+    return {
+      access_token: this.jwtService.sign(payload),
+    };
   }
 }

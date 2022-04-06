@@ -1,24 +1,25 @@
+import { UserRepository } from './../../repositories/user.repository';
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
 import { Strategy } from 'passport-jwt';
 import { ACCOUNT_TYPE, TOKEN_ERROR_CODE } from 'src/common/consts/enum';
 import { errorBody } from 'src/common/funcs/error.func';
 import { JwtStrategyConfig } from '../jwt-config';
+import { Payload } from '../jwt-payload';
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
-  constructor() {
+  constructor(private readonly userRepository: UserRepository) {
     super(JwtStrategyConfig);
   }
 
-  async validate(payload: any) {
-    if (payload.accountType !== ACCOUNT_TYPE.USER) {
-      throw new UnauthorizedException(
-        errorBody(TOKEN_ERROR_CODE.NOT_ACCOUNT, '회원이 아닙니다.'),
-      );
+  async validate(payload: Payload) {
+    const user = await this.userRepository.findOneByUserId(payload.id);
+
+    if (user) {
+      return user;
+    } else {
+      throw new UnauthorizedException('접근 오류');
     }
-    return {
-      id: payload.id,
-    };
   }
 }
