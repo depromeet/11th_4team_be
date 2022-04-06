@@ -1,5 +1,5 @@
-import { UpdateProfileDto } from './../apis/user/dto/user.dto';
-import { PhoneNumberDto } from '../apis/user/dto/user.dto';
+import { UpdateProfileDto } from '../apis/users/dto/user.dto';
+import { PhoneNumberDto } from '../apis/users/dto/user.dto';
 import { InjectModel } from '@nestjs/mongoose';
 import { Injectable, HttpException } from '@nestjs/common';
 import { Model } from 'mongoose';

@@ -1,7 +1,7 @@
 import { string } from 'joi';
 import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { ApiBody, ApiOperation, ApiParam, ApiTags } from '@nestjs/swagger';
-import { PhoneNumberDto } from 'src/apis/user/dto/user.dto';
+import { PhoneNumberDto } from 'src/apis/users/dto/user.dto';
 import { AuthenticationService } from './authentication.service';
 import { CertificationMobileDto } from './dto/send-mobile.dto';
 

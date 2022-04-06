@@ -1,4 +1,4 @@
-import { UserModule } from './../apis/user/user.module';
+import { UserModule } from '../apis/users/user.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { forwardRef, Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
