@@ -1,4 +1,3 @@
-import { ObjectId } from 'mongoose';
 import { UserRepository } from 'src/repositories/user.repository';
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { PhoneNumberDto, UpdateProfileDto } from './dto/user.dto';
@@ -23,10 +22,14 @@ export class UserService {
 
   async updateProfile(userId: string, data: UpdateProfileDto): Promise<any> {
     const { nickname } = data;
-    const isNicknameExist = await this.userRepository.existByNickName(nickname);
+    const user = await this.userRepository.findOneByUserId(userId);
+    const usingNickname = await this.userRepository.existByNickName(nickname);
 
-    if (isNicknameExist) {
-      throw new UnauthorizedException('해당하는 닉네임 이미 존재');
+    console.log(user.nickname, nickname);
+    if (user.nickname === nickname || usingNickname) {
+      throw new UnauthorizedException(
+        '동일한 닉네임 혹은 이미 사용중인 닉네임 존재',
+      );
     } else {
       return await this.userRepository.updateProfile(data);
     }

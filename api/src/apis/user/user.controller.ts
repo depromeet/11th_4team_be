@@ -1,7 +1,24 @@
+import { ReqUser } from 'src/common/decorators/user.decorator';
+import { JwtAuthGuard } from 'src/auth/guards/jwt.guard';
 import { User } from 'src/models/user.model';
 import { AuthenticationService } from './../authentication/authentication.service';
-import { Body, Controller, Post, Param, Put } from '@nestjs/common';
-import { ApiBody, ApiOperation, ApiTags, ApiParam } from '@nestjs/swagger';
+import {
+  Body,
+  Controller,
+  Post,
+  Param,
+  Put,
+  UseGuards,
+  Get,
+} from '@nestjs/common';
+import {
+  ApiBody,
+  ApiOperation,
+  ApiTags,
+  ApiParam,
+  ApiBearerAuth,
+  ApiUnauthorizedResponse,
+} from '@nestjs/swagger';
 import { AuthService } from 'src/auth/auth.service';
 import { ResponseSignUp } from 'src/common/decorators/response.decorator';
 import { UserService } from './user.service';
@@ -41,20 +58,31 @@ export class UserController {
     }
   }
 
-  @ApiOperation({ summary: '로그인' })
+  @ApiOperation({ summary: '로그인 - 인증번호(현재는 번호)' })
+  @ApiUnauthorizedResponse({
+    description: `
+    code - 
+    0: 휴대폰 번호가 없을 경우
+    1: 인증번호가 일치하지 않을 경우
+    2: 계정이 잠겼을 경우,
+    3: 계정이 비활성화된 경우`,
+  })
+  @ResponseSignUp()
+  @ApiBody({ type: PhoneNumberDto })
   @Post('signIn')
-  login(@Body() data: PhoneNumberDto) {
-    return this.authService.signUp(data);
+  async login(@Body() data: PhoneNumberDto) {
+    return await this.authService.signUp(data);
   }
 
-  @ApiOperation({ summary: '유저 정보 입력' })
-  @ResponseSignUp()
+  @ApiOperation({ summary: '유저 정보 수정' })
+  @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
   @ApiBody({ type: UpdateProfileDto })
-  @Put('profile/:userId')
+  @Put('profile')
   async updateProfile(
     @Body() updateProfileData: UpdateProfileDto,
-    @Param('userId') userId: string,
+    @ReqUser() user: User,
   ): Promise<any> {
-    return await this.userService.updateProfile(userId, updateProfileData);
+    return await this.userService.updateProfile(user._id, updateProfileData);
   }
 }
