@@ -17,8 +17,10 @@ module.exports = (passport) => {
                 nickname: "Undefined",
                 phoneNumber: phoneNumber, 
               })).save()
+            } else {
+// Already registered
             }
-            done(null, {id: user._id}, {message: '인증 성공'})
+            done(null, {_id: user._id}, {message: '인증 성공'})
           }
           else done(null, false, {message: '인증 실패'})
           await redisClient.del(phoneNumber)

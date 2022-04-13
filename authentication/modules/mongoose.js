@@ -7,9 +7,10 @@ mongoose.set('useCreateIndex', true);
 module.exports = {
   initialize: (host, port) => {
     mongoose
-      .connect(`mongodb://${host}:${port}/`, {
-        useUnifiedTopology: true,
+      .connect(`mongodb://${host}:${port}/nest`, {
         useNewUrlParser: true,
+        useUnifiedTopology: true,
+        useCreateIndex: true,
         useFindAndModify: false,
       })
       .then(() =>
